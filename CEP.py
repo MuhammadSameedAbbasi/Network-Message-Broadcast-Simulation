@@ -5,7 +5,7 @@ import matplotlib.animation as animation
 
 # Define the size of the grid and the number of time steps
 grid_size = (50, 50)
-num_steps = 80
+num_steps = 140
 
 # Manually declare the initial state for the cellular automaton
 initial_state = np.zeros(grid_size)
@@ -24,6 +24,8 @@ initial_state[0:10, 40] = 2
 initial_state[30:47, 13] = 2
 initial_state[44, 10:45] = 2
 initial_state[35:45, 35:40] = 2
+initial_state[26:45, 25] = 2
+initial_state[26, 25:50] = 2
 
 #make a swirl of unresponsive cells
 initial_state[10, 20:30] = 2
@@ -39,7 +41,7 @@ initial_state[18, 24:29] = 2
 
 
 # Set a block of live cells
-initial_state[32, 25] = 1  
+initial_state[33, 23] = 1  
 
 
 # Create a figure and axis for the animation
@@ -90,7 +92,7 @@ def update(step):
         sys.exit()  # Stop the animation
 
 # Create an animation
-ani = animation.FuncAnimation(fig, update, frames=num_steps, interval=50)
+ani = animation.FuncAnimation(fig, update, frames=num_steps, interval=20)
 
 # Display the animation
 plt.show()
