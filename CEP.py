@@ -21,8 +21,9 @@ initial_state[:, grid_size[1]-1] = 2
 #set a block of unresponsive cells
 initial_state[10, 0:10] = 2
 initial_state[0:10, 40] = 2
-initial_state[40:47, 13] = 2
+initial_state[30:47, 13] = 2
 initial_state[44, 10:45] = 2
+initial_state[35:45, 35:40] = 2
 
 #make a swirl of unresponsive cells
 initial_state[10, 20:30] = 2
