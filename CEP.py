@@ -36,11 +36,17 @@ initial_state[12, 20:28] = 2
 initial_state[12:18, 28] = 2
 initial_state[18, 24:29] = 2
 
+coordinates=[27, 9, 10, 29, 40, 47]
 
 # Set a block of live cells
-initial_state[33, 23] = 1
-initial_state[13, 24] = 1
-initial_state[13, 45] = 1
+
+initial_state[coordinates[0], coordinates[1]] = 1
+initial_state[coordinates[2], coordinates[3]] = 1
+initial_state[coordinates[4], coordinates[5]] = 1
+
+# initial_state[33, 23] = 1
+# initial_state[13, 24] = 1
+# initial_state[43, 45] = 1
 
 
 # Create a figure and axis for the animation
