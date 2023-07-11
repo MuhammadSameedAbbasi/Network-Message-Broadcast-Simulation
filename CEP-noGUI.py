@@ -42,9 +42,11 @@ def update(step, current_state):
     
     return update(step+1,current_state)
 
+
+coordinate_combinations = []
 min_steps = 150
 step=0
-init_coordinates=[27, 9, 10, 29, 40, 47] #[33, 23, 13, 18, 43, 45] #[33,23,13,24,43,45]
+init_coordinates= [26, 8, 11, 28, 42, 46] #[33, 21, 13, 19, 43, 47] #[27, 9, 10, 29, 40, 47] #[33, 23, 13, 18, 43, 45] #[33,23,13,24,43,45]
 while (True):
     # Manually declare the initial state for the cellular automaton
     initial_state = np.zeros(grid_size)
@@ -94,7 +96,10 @@ while (True):
     new_y_coordiante=coordinates[yindex]+ygrid_diff
 
     count=0
-    while( new_x_coordiante<=0 or new_x_coordiante>=50 or new_y_coordiante<=0 or new_y_coordiante>=50 or initial_state[ new_y_coordiante , new_x_coordiante ]==2):
+    while( new_x_coordiante<=0 or new_x_coordiante>=50 or
+           new_y_coordiante<=0 or new_y_coordiante>=50 or 
+           initial_state[ new_y_coordiante , new_x_coordiante ]==2 or 
+           (coordinates[xindex]+xgrid_diff in coordinate_combinations)):
 
         xindex= random.randint(0,5)
         xgrid_diff= random.randint(-3,3)
@@ -125,6 +130,7 @@ while (True):
     totalsteps=0
     # start the grid simulation
     totalsteps = update(step,current_state)
+    coordinate_combinations.append(coordinates)
     
     
 

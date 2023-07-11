@@ -36,7 +36,7 @@ initial_state[12, 20:28] = 2
 initial_state[12:18, 28] = 2
 initial_state[18, 24:29] = 2
 
-coordinates=[27, 9, 10, 29, 40, 47]
+coordinates=[26, 8, 11, 28, 42, 46]
 
 # Set a block of live cells
 
