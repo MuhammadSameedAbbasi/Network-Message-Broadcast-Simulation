@@ -1,5 +1,4 @@
 import random
-import sys
 import numpy as np
 
 # Define the size of the grid and the number of time steps
@@ -83,11 +82,36 @@ def update(step, current_state):
     
     return update(step+1,current_state)
 
+# min step points =45 steps
+# [45, 39, 14, 18]
+# [45, 40, 14, 18]
+# [45, 40, 15, 19]
+# [46, 40, 14, 18]
+# [45, 39, 14, 19]
+# [45, 39, 12, 16]
+# [46, 40, 14, 19]
+# [45, 40, 13, 17]
+# [47, 42, 13, 17]
+# [46, 41, 13, 17]
+# [46, 40, 15, 19]
+# [46, 40, 13, 18]
+# [47, 41, 14, 18]
+# [47, 41, 13, 18]
+# [47, 42, 14, 18]
+# [47, 41, 14, 19]
+# [47, 41, 15, 19]
+# [47, 41, 12, 17]
+# [47, 41, 13, 17]
+# [46, 41, 12, 16]
+# [47, 41, 12, 16]
+
+
+
 
 coordinate_combinations = []
 min_steps = 150
 step=0
-init_coordinates= [12, 12, 48, 44, 12, 36] # [13, 4, 34, 33, 11, 38] #[1,7,31,24,11,41] #[3, 47, 10, 25, 40, 28] #[34, 45, 10, 29, 26, 10]
+init_coordinates= [47, 41, 12, 17]# [45, 39, 14, 18]
 while (True):
     # Manually declare the initial state for the cellular automaton
     initial_state = np.zeros(grid_size)
@@ -129,10 +153,10 @@ while (True):
 
     diff_size=3
 
-    yindex = random.choice([0,2,4])
+    yindex = random.choice([0,2])
     ygrid_diff= random.randint(-diff_size,diff_size)
 
-    xindex = random.choice([1,3,5])
+    xindex = random.choice([1,3])
     xgrid_diff= random.randint(-diff_size,diff_size)
 
     new_x_coordiante=coordinates[xindex]+xgrid_diff
@@ -148,10 +172,10 @@ while (True):
            initial_state[ new_y_coordiante , new_x_coordiante ]==2 or 
            (tempcord in coordinate_combinations)):
 
-        yindex = random.choice([0,2,4])
+        yindex = random.choice([0,2])
         ygrid_diff= random.randint(-diff_size,diff_size)
 
-        xindex = random.choice([1,3,5])
+        xindex = random.choice([1,3])
         xgrid_diff= random.randint(-diff_size,diff_size)
         
         new_x_coordiante=coordinates[xindex]+xgrid_diff
@@ -168,12 +192,10 @@ while (True):
     coordinates[xindex]= new_x_coordiante
     coordinates[yindex]= new_y_coordiante
 
-    
-
     # Set a block of live cells
     initial_state[coordinates[0], coordinates[1]] = 1
     initial_state[coordinates[2], coordinates[3]] = 1
-    initial_state[coordinates[4], coordinates[5]] = 1
+    #initial_state[coordinates[4], coordinates[5]] = 1
 
     # Initialize the current state
     current_state = initial_state.copy()

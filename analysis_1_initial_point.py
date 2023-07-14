@@ -1,5 +1,4 @@
-import random
-import sys
+#one by one checking all possibilities for a single initial point
 import numpy as np
 
 # Define the size of the grid and the number of time steps
@@ -51,48 +50,48 @@ coordinate_list=[(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8),
 # Manually declare the initial state for the cellular automaton
 initial_state = np.zeros(grid_size)
 # Function to update the plot for each time step
-def update(step, current_state):
+def update(step_count, current_stat):
     #global current_state  # Declare current_state as a global variable
 
     # Create a copy of the current state
-    new_state = current_state.copy()
+    new_state = current_stat.copy()
 
     # Apply the rules of the cellular automaton to update the state
-    if step > 0:
+    if step_count > 0:
         for i in range(1, grid_size[0] - 1):
             for j in range(1, grid_size[1] - 1):
                 # Apply the rule: top, bottom, left, and right cells of an active cell become live
-                if current_state[i, j] == 1:
-                    if(current_state[i-1, j] != 2):
+                if current_stat[i, j] == 1:
+                    if(current_stat[i-1, j] != 2):
                         new_state[i-1, j] = 1
-                    if(current_state[i+1, j] != 2):
+                    if(current_stat[i+1, j] != 2):
                         new_state[i+1, j] = 1
-                    if(current_state[i, j-1] != 2):
+                    if(current_stat[i, j-1] != 2):
                         new_state[i, j-1] = 1
-                    if(current_state[i, j+1] != 2):
+                    if(current_stat[i, j+1] != 2):
                         new_state[i, j+1] = 1
 
     # Update the current state
-    current_state = new_state
+    current_stat = new_state
     
     # Check if all cells are filled
-    if np.all(current_state >= 1):
-        #print(step)
-        return step
+    if np.all(current_stat >= 1):
+        
+        return step_count
          # Stop the animation
     
-    return update(step+1,current_state)
+    return update(step_count+1,current_stat)
 
 
-coordinate_combinations = []
-min_steps = 150
-step=0
-init_coordinates= [12, 12, 48, 44, 12, 36] # [13, 4, 34, 33, 11, 38] #[1,7,31,24,11,41] #[3, 47, 10, 25, 40, 28] #[34, 45, 10, 29, 26, 10]
-while (True):
+async def main():
+    min_steps = 160
+    step=0
+    init_coordinates= [1 ,1] # [13, 4, 34, 33, 11, 38] #[1,7,31,24,11,41] #[3, 47, 10, 25, 40, 28] #[34, 45, 10, 29, 26, 10]
+
     # Manually declare the initial state for the cellular automaton
     initial_state = np.zeros(grid_size)
 
-    
+
     #set edges to unresponsive cells
     initial_state[0, :] = 2
     initial_state[grid_size[0]-1, :] = 2
@@ -119,75 +118,52 @@ while (True):
     initial_state[18, 24:29] = 2
 
 
-    #coordinates[random.randint(0,5)]+=random.randint(-3,3)
-    coordinates=init_coordinates.copy()
-    # change one coordinate randomly
-    xindex=0
-    xgrid_diff=0
-    yindex=0
-    ygrid_diff=0
-
-    diff_size=3
-
-    yindex = random.choice([0,2,4])
-    ygrid_diff= random.randint(-diff_size,diff_size)
-
-    xindex = random.choice([1,3,5])
-    xgrid_diff= random.randint(-diff_size,diff_size)
-
-    new_x_coordiante=coordinates[xindex]+xgrid_diff
-    new_y_coordiante=coordinates[yindex]+ygrid_diff
-
-    tempcord=coordinates.copy()
-    tempcord[xindex]+=xgrid_diff
-    tempcord[yindex]+=ygrid_diff
-
-    count=0
-    while( new_x_coordiante<=0 or new_x_coordiante>=50 or
-           new_y_coordiante<=0 or new_y_coordiante>=50 or 
-           initial_state[ new_y_coordiante , new_x_coordiante ]==2 or 
-           (tempcord in coordinate_combinations)):
-
-        yindex = random.choice([0,2,4])
-        ygrid_diff= random.randint(-diff_size,diff_size)
-
-        xindex = random.choice([1,3,5])
-        xgrid_diff= random.randint(-diff_size,diff_size)
-        
-        new_x_coordiante=coordinates[xindex]+xgrid_diff
-        new_y_coordiante=coordinates[yindex]+ygrid_diff
-
-        count+=1
-        if count>3:
-            
-            new_x_coordiante=random.choice(coordinate_list)[1]
-            new_y_coordiante=random.choice(coordinate_list)[0]
-            count=0
-
-    
-    coordinates[xindex]= new_x_coordiante
-    coordinates[yindex]= new_y_coordiante
-
-    
-
+    temp=coordinate_list.pop(0)
     # Set a block of live cells
-    initial_state[coordinates[0], coordinates[1]] = 1
-    initial_state[coordinates[2], coordinates[3]] = 1
-    initial_state[coordinates[4], coordinates[5]] = 1
 
-    # Initialize the current state
-    current_state = initial_state.copy()
 
     totalsteps=0
+
+
+
+#    for i in range(len(coordinate_list)):
+    
     # start the grid simulation
-    totalsteps = update(step,current_state)
-    coordinate_combinations.append(coordinates)
-    
-    
+    initial_state[temp[0], temp[1]] = 1
+    totalsteps = update(step,initial_state)
+    #coordinate_combinations.append(coordinates)
+
 
     if totalsteps<=min_steps:
         min_steps=totalsteps
-        init_coordinates=coordinates
-        print(totalsteps , init_coordinates)
+        #init_coordinates=coordinates
+        print(totalsteps , temp)
+
+
+
+import asyncio
+import concurrent.futures
+
+async def process_coordinate_combination():
+    # Your code to process the coordinate combination goes here
+    # ...
+    await main()  # Simulating some async task
+
+async def maint():
+    # Process coordinate combinations asynchronously
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        loop = asyncio.get_event_loop()
+        tasks = []
+        
+        for combination in range(len(coordinate_list)):
+            task = loop.create_task(process_coordinate_combination())
+            tasks.append(task)
+        
+        await asyncio.gather(*tasks)
+
+# Run the main function
+if __name__ == '__main__':
+    asyncio.run(maint())
+
 
 
