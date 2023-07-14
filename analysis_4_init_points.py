@@ -86,7 +86,7 @@ def update(step, current_state):
 coordinate_combinations = []
 min_steps = 150
 step=0
-init_coordinates=  [41, 46, 29, 18, 9, 21]
+init_coordinates= [35, 5, 27, 19, 23, 6, 18, 41]
 while (True):
     # Manually declare the initial state for the cellular automaton
     initial_state = np.zeros(grid_size)
@@ -129,10 +129,10 @@ while (True):
 
     diff_size=2
 
-    yindex = random.choice([0,2,4])
+    yindex = random.choice([0,2,4,6])
     ygrid_diff= random.randint(-diff_size,diff_size)
 
-    xindex = random.choice([1,3,5])
+    xindex = random.choice([1,3,5,7])
     xgrid_diff= random.randint(-diff_size,diff_size)
 
     new_x_coordiante=coordinates[xindex]+xgrid_diff
@@ -149,13 +149,14 @@ while (True):
            (tempcord in coordinate_combinations) or
             (tempcord[0],tempcord[1]) not in coordinate_list or
             (tempcord[2],tempcord[3]) not in coordinate_list or
-            (tempcord[4],tempcord[5]) not in coordinate_list       
+            (tempcord[4],tempcord[5]) not in coordinate_list or
+            (tempcord[6],tempcord[7]) not in coordinate_list       
            ):
 
-        yindex = random.choice([0,2,4])
+        yindex = random.choice([0,2,4,6])
         ygrid_diff= random.randint(-diff_size,diff_size)
 
-        xindex = random.choice([1,3,5])
+        xindex = random.choice([1,3,5,7])
         xgrid_diff= random.randint(-diff_size,diff_size)
         
         new_x_coordiante=coordinates[xindex]+xgrid_diff
@@ -164,13 +165,13 @@ while (True):
         count+=1
         if count>3:
             
-            new_x_coordiante=random.choice(coordinate_list)[1]
             new_y_coordiante=random.choice(coordinate_list)[0]
+            new_x_coordiante=random.choice(coordinate_list)[1]
             count=0
 
     
-    coordinates[xindex]= new_x_coordiante
     coordinates[yindex]= new_y_coordiante
+    coordinates[xindex]= new_x_coordiante
 
     
 
@@ -178,6 +179,7 @@ while (True):
     initial_state[coordinates[0], coordinates[1]] = 1
     initial_state[coordinates[2], coordinates[3]] = 1
     initial_state[coordinates[4], coordinates[5]] = 1
+    initial_state[coordinates[6], coordinates[7]] = 1
 
     # Initialize the current state
     current_state = initial_state.copy()
