@@ -36,13 +36,13 @@ initial_state[12, 20:28] = 2
 initial_state[12:18, 28] = 2
 initial_state[18, 24:29] = 2
 
-coordinates=[26, 8, 11, 28, 42, 46]
+coordinates= [45, 36, 13, 19, 45, 18]
 
 # Set a block of live cells
 
 initial_state[coordinates[0], coordinates[1]] = 1
 initial_state[coordinates[2], coordinates[3]] = 1
-initial_state[coordinates[4], coordinates[5]] = 1
+# initial_state[coordinates[4], coordinates[5]] = 1
 
 # initial_state[33, 23] = 1
 # initial_state[13, 24] = 1
@@ -97,7 +97,7 @@ def update(step):
         sys.exit()  # Stop the animation
 
 # Create an animation
-ani = animation.FuncAnimation(fig, update, frames=num_steps, interval=20)
+ani = animation.FuncAnimation(fig, update, frames=num_steps, interval=100)
 
 # Display the animation
 plt.show()
