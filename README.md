@@ -3,17 +3,21 @@
 # Optimizing Distribution In Networks With Multiple Starting Nodes Combinations 
 
 
-1. Introduction
-In this project, we aim to optimize the data broadcasting protocol in networks, especially decentralized networks, within a specifically selective dead node environment scenario. The goal is to ensure that all active nodes in the network receive the data while maintaining the untraceability of the data origin. We will analyze the best starting nodes for achieving optimal efficiency. To simulate and analyze the system, we will implement a 2D Cellular Automata simulation using Python.
+#Introduction
 
-Problem Statement
+In this project, we aim to optimize the data broadcasting protocol in networks, especially decentralized networks, within a specifically selective dead node environment scenario. The goal is to ensure that all active nodes in the network receive the data while maintaining the untraceability of the data origin. We will analyze the best starting nodes for achieving optimal efficiency. To simulate and analyze the system, we will implement a 2D Cellular Automata simulation using Python.
+This experiment encompasses and can be used for all environments that have a broadcast-to-immediate-neighbors nature of distribution, such as: spread of a viral disease like Covid-19, spreading any information or rumor in a human population density, spreading of a spray like a disinfectant or air freshener inside a building for fastest full coverage speed, etc.
+
+#Problem Statement
+
 In decentralized networks, it is crucial to efficiently broadcast data to all active nodes while considering challenges such as selective dead nodes and full mesh scenarios. Additionally, preserving the untraceability of the data origin is essential for maintaining privacy and security. The problem can be summarized as follows:
 Design an optimized data broadcasting protocol that ensures all active nodes receive the data.
 Address the challenges posed by selective dead node environments and full mesh scenarios.
 Develop a shortest path selection method for efficient data propagation.
 Maintain the untraceability of the data origin by limiting data transmission to adjacent nodes.
 
-System Design and Modeling
+#System Design and Modeling
+
 In our project, we aim to optimize the data broadcasting protocol in decentralized networks within selective dead node and full mesh scenarios. Our goal is to ensure that all active nodes in the blockchain network receive the data while maintaining the untraceability of the data origin. To achieve this, we have developed a detailed system design and modeling approach that incorporates stochastic processes and control strategies to optimize efficiency in the data broadcasting process.
 
 The system architecture consists of a 2-dimensional grid, where each block represents a node in the decentralized network. Nodes communicate with their adjacent nodes by transferring data, creating a peer-to-peer network structure.
@@ -22,7 +26,8 @@ We have designed an optimized data broadcasting protocol that guarantees all act
 
 We have also considered the presence of unresponsive nodes in the network. These nodes cannot receive or transmit data, and we have implemented mechanisms to handle their presence during the data broadcasting process.
 
-Simulation and Analysis
+#Simulation and Analysis
+
 To simulate real-world uncertainties, we have introduced stochastic processes in our modeling approach. These processes capture the responsiveness of nodes and network conditions. By introducing randomness, we account for variations in the behavior of nodes and network connectivity.
 
 Our modeling approach includes a 2D Cellular Automata simulation implemented using Python. The simulation accurately models the decentralized network, defining the rules and behaviors of nodes, data transmission, node responsiveness, and interaction with adjacent nodes. The developed data broadcasting protocol and control strategies are integrated into the simulation for comprehensive analysis.
@@ -35,7 +40,8 @@ The Simulation environment is shown below where the initial node is [32:23]. Gra
 
 
 
-Experimental Validation
+#Experimental Validation
+
 As part of our evaluation, we define a metric to assess the efficiency of the data broadcasting protocol. Our primary focus for efficiency is the number of steps taken until all responsive nodes receive the data.
 
 The following pattern of unresponsive blocks is used for all evaluations of this system as it covers all variations of possible situations:
@@ -45,7 +51,8 @@ By employing our detailed system design and modeling approach, we can optimize t
 
 To find the optimum position in a multi initial point system we are using the Reinforced learning algorithm. Although it is not 100% accurate, the inaccuracy is not substantial enough to discard the results.
 
-Results
+#Results
+
 The results of the experiments are shown below, the coordinates are in the format Y, X:  
 
 Initial starting points: 			1
@@ -117,10 +124,10 @@ Coordinates of the minimum steps:
 
 Note: The coordinate combination lists are not exhaustive but are only a few examples of the possible combinations and a simulation example of only one combination is added for better visualization. 
 
-Analysis
+#Analysis
+
 From these results it can be concluded that the number of steps required to reach all nodes Decrease as the number of Initial points Increase however adding additional initial points reduce the percentage of improvement as each initial point is added.
 
-This experiment encompasses and can be used for all environments that have a broadcast-to-immediate-neighbors nature of distribution, such as: spread of a viral disease like Covid-19, spreading any information or rumor in a human population density, spreading of a spray like a disinfectant or air freshener inside a building for fastest full coverage speed, etc.
 
 
 
